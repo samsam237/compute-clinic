@@ -1,0 +1,21 @@
+# Base URL
+@baseUrl = http://localhost:3000
+
+### Tester la route /generate
+POST {{baseUrl}}/generate
+Content-Type: application/json
+
+{
+}
+
+### Tester la route /export
+POST {{baseUrl}}/export
+Content-Type: application/json
+
+{
+  "data": [
+    { "id": 1, "name": "Alice", "age": 25 },
+    { "id": 2, "name": "Bob", "age": 30 }
+  ],
+  "format": "csv"
+}
