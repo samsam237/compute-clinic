@@ -19,3 +19,131 @@ Content-Type: application/json
   ],
   "format": "csv"
 }
+
+
+### Tester la route /logs
+GET {{baseUrl}}/logs
+Content-Type: application/json
+
+{
+}
+
+### Récupérer tous les cas cliniques
+GET {{baseUrl}}/clinical_cases
+Content-Type: application/json
+
+### Ajouter un nouveau cas clinique
+POST {{baseUrl}}/clinical_cases
+Content-Type: application/json
+
+{
+  "diagnostic": {
+    "name": "Hypertension",
+    "result": "150/90 mmHg"
+  },
+  "currentTreatment": "Amlodipine 5mg",
+  "lifestyle": {
+    "addiction": [{ "name": "Smoking", "frequency": "Daily", "duration": "10 years" }],
+    "physicalActivity": [{ "name": "Walking", "frequency": "3 times a week" }],
+    "travel": [{ "location": "City X", "frequency": "Monthly", "duration": "3 days" }],
+    "pets": ["Dog"],
+    "mosquitoNet": true,
+    "waterQuantity": "3L/day"
+  },
+  "personalData": {
+    "age": 45,
+    "sex": "Male",
+    "maritalStatus": "Married",
+    "profession": "Engineer",
+    "childrenCount": 2,
+    "bloodGroup": "O+"
+  },
+  "consultationReason": "Regular check-up",
+  "additionalTests": [
+    { "name": "Blood Test", "result": "Normal", "anatomy": "Arm" }
+  ],
+  "medicalHistory": {
+    "familyHistory": "Diabetes",
+    "allergies": [{ "manifestation": "Skin Rash", "trigger": "Peanuts" }],
+    "diseases": [
+      {
+        "name": "Diabetes",
+        "startDate": "2015-01-01",
+        "endDate": "2020-01-01",
+        "observation": "Well-managed",
+        "treatment": { "duration": "5 years", "posology": "Metformin 500mg" }
+      }
+    ],
+    "surgeries": [{ "name": "Appendectomy", "date": "2010-05-01" }],
+    "obstetricalHistory": { "pregnancies": 2, "lastPregnancyDate": "2018-09-15" }
+  },
+  "symptoms": [
+    {
+      "name": "Headache",
+      "location": "Forehead",
+      "startDate": "2024-01-01",
+      "frequency": "Occasional",
+      "duration": "2 hours",
+      "evolution": "Stable",
+      "triggeringActivity": "Stress",
+      "severity": 3
+    }
+  ]
+}
+
+### Rechercher des cas cliniques par des contraintes spécifiques
+POST {{baseUrl}}/clinical_cases/search
+Content-Type: application/json
+
+{
+  "startDate": "2023-01-01",
+  "endDate": "2024-01-01",
+  "symptoms": "Headache",
+  "disease": "Diabetes"
+}
+
+### Modifier un cas clinique existant
+PUT {{baseUrl}}/clinical_cases/1
+Content-Type: application/json
+
+{
+  "consultationReason": "Follow-up visit",
+  "currentTreatment": "Updated Treatment"
+}
+
+### Supprimer un cas clinique
+DELETE {{baseUrl}}/clinical_cases/1
+Content-Type: application/json
+
+### Ajouter un ensemble de cas cliniques en batch
+POST {{baseUrl}}/clinical_cases
+Content-Type: application/json
+
+[
+  {
+    "diagnostic": {
+      "name": "Hypertension",
+      "result": "140/90 mmHg"
+    },
+    "currentTreatment": "Losartan 50mg",
+    "personalData": {
+      "age": 50,
+      "sex": "Female",
+      "maritalStatus": "Widowed",
+      "profession": "Teacher",
+      "childrenCount": 3,
+      "bloodGroup": "A+"
+    },
+    "consultationReason": "Chest pain",
+    "symptoms": [
+      {
+        "name": "Chest pain",
+        "location": "Left chest",
+        "startDate": "2024-02-01",
+        "frequency": "Daily",
+        "duration": "30 minutes",
+        "severity": 4
+      }
+    ]
+  }
+]

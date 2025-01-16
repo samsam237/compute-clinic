@@ -19,7 +19,9 @@ export class GeneratorFromDB implements GeneratorEntityInterface {
 
   public async generate(): Promise<any> {
     if (!this.db) {return null; }
+    
     const datas = await fetchAll (this.db as unknown as Database, `SELECT * FROM data`)
+    
     return datas;
   }
 }

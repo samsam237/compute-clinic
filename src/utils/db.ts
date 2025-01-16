@@ -1,5 +1,7 @@
 import sqlite3 from 'sqlite3';
 import { open, Database } from 'sqlite';
+import { promisify } from 'util';
+import { log } from 'console';
 
 /* export const initDatabase = async (): Promise<Database> => {
     const db = await open({
@@ -62,14 +64,31 @@ export class DatabaseSingleton {
     }
 }
 
-export const fetchAll = async (db: sqlite3.Database, sql: string, params: any[] = []): Promise<any[]> => {
+export function fetchAll(db: sqlite3.Database, sql: string, params: any[] = []): Promise<any[]> {
     return new Promise((resolve, reject) => {
-      db.all(sql, params, (err, rows) => {
-        if (err) return reject(err);
-        resolve(rows);
-      });
-    });
-  };
-  
+        const results: any[] = [];
 
-//export default DatabaseSingleton;
+        db.each(sql, params, (err, row) => {
+            if (err) {
+                return reject(err);
+            }
+            results.push(row);
+        });
+
+        setTimeout(() => {
+            resolve(results);
+        }, 1500);
+    });
+}
+
+const test = async (): Promise<void> => {
+    const db = await DatabaseSingleton.getInstance();
+    console.log("Connexion à la base de données réussie.");
+
+    try {
+        const data = await fetchAll(db, "SELECT * FROM data");
+        console.log("Données récupérées :", data);
+    } catch (error) {
+        console.error("Erreur lors de la récupération des données :", error);
+    }
+};

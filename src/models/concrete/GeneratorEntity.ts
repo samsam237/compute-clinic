@@ -7,6 +7,7 @@ import { ExportToCSV } from "./ExportCSV";
 import { GeneratorFromAPI } from "./GeneratorFromAPI";
 import { GeneratorFromDB } from "./GeneratorFromDB";
 import { Database } from "sqlite3";
+import { promisify } from 'util';
 
 export class GeneratorEntity extends EntityAbstract {
     private state: any = null;
@@ -35,10 +36,11 @@ export class GeneratorEntity extends EntityAbstract {
         }                   
     }  
 
-    public async generate(): Promise<Buffer> {
+    public async generate(): Promise<any> {
       const data : string = await this.generator.generate();
       this.notify(`Data generated : ${data}`);  
-      return this.exporter.export(data);
+      //return this.exporter.export(data);
+      return data;
     }
 
     public getState(): any {

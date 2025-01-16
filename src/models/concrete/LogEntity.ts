@@ -13,7 +13,6 @@ export class LogEntity extends ObserverAbstract{
     
     async update(data : any): Promise<void> {
         const logEntry = `LogEntity received update: ${JSON.stringify(data)}`;
-        console.log (logEntry);
         this.logs.push(logEntry);
 
         const stmt = await this.db?.prepare(

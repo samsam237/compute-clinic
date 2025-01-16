@@ -4,7 +4,8 @@ import { ExportEntityInterface } from '../interfaces/ExportEntityInterface';
 
 export class ExportToCSV implements ExportEntityInterface {
     public async export(data: string): Promise<Buffer> {
-        const csvData = json2csv.parse(JSON.parse(data)); 
+        //const myData = JSON.parse(data);
+        const csvData = json2csv.parse(data); 
         return Buffer.from(csvData, 'utf-8'); 
     }
 }
