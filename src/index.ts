@@ -83,8 +83,9 @@ app.get('/clinical_cases', (req: Request, res: Response) => {
    * Rechercher des cas cliniques avec des critères.
    */
   app.post('/clinical_cases/search', (req: Request, res: Response) : any => {
-    const { constraints } = req.body;
-  
+    const  constraints  = req.body;
+    
+    console.log (constraints)
     // Vérifier si des contraintes sont fournies
     if (!constraints || typeof constraints !== 'object') {
       return res.status(400).json({ error: 'Les contraintes de recherche sont invalides ou manquantes.' });
