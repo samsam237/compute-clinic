@@ -1,5 +1,5 @@
 
 export interface GeneratorEntityInterface {
     path : string;
-    generate ():Promise<any>;
+    generate (constraint : any | null):Promise<any>;
 }

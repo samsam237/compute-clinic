@@ -7,5 +7,5 @@ export interface Config {
 export const config: Config = {
     dataSource: "api", 
     exportFormat: "json", 
-    path: "", 
+    path: "http://127.0.0.1:8000/api/casCliniques/getPatientsRecords", 
 };  

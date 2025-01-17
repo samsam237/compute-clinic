@@ -4,9 +4,9 @@ import { ExportEntityInterface } from '../interfaces/ExportEntityInterface';
 
 export class ExportToXML implements ExportEntityInterface {
     public async export(data: string): Promise<Buffer> {
-        const jsonData = JSON.parse(data); 
+        //const jsonData = JSON.parse(data); 
 
-        const xmlData = await this.convertJsonToXml(jsonData);
+        const xmlData = await this.convertJsonToXml(data);
         
         return Buffer.from(xmlData, 'utf-8'); 
     }

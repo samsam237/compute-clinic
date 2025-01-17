@@ -36,8 +36,8 @@ export class GeneratorEntity extends EntityAbstract {
         }                   
     }  
 
-    public async generate(): Promise<any> {
-      const data : string = await this.generator.generate();
+    public async generate(constraint : any | null): Promise<any> {
+      const data : string = await this.generator.generate(constraint);
       this.notify(`Data generated : ${data}`);  
       //return this.exporter.export(data);
       return data;

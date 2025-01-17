@@ -29,7 +29,7 @@ app.post('/generate', async (req: Request, res: Response) : Promise<any> => {
     try {
         const generator = new GeneratorEntity(db);
         generator.attach(logger);
-        const data = await generator.generate();
+        const data = await generator.generate(constraints);
         res.json({ success: true, data });
     } catch (error) {
         console.error(error);
