@@ -14,6 +14,14 @@ app.use(express.json());
 
 app.post('/generate', async (req: Request, res: Response) : Promise<any> => {
 
+    const  constraints  = req.body;
+    
+    console.log (constraints)
+
+    if (!constraints || typeof constraints !== 'object') {
+      return res.status(400).json({ error: 'Les contraintes de recherche sont invalides ou manquantes.' });
+    }
+    
     const db = await DatabaseSingleton.getInstance(); 
 
     const logger = new LogEntity(db);
