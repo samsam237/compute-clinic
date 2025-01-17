@@ -5,7 +5,7 @@ export interface Config {
 }
   
 export const config: Config = {
-    dataSource: "db", 
+    dataSource: "api", 
     exportFormat: "json", 
-    path: "./logs.db", 
+    path: "", 
 };  

@@ -3,20 +3,21 @@ import { GeneratorEntity } from './models/concrete/GeneratorEntity';
 import { ExportEntity } from './models/concrete/ExportEntity';
 import {LogEntity} from './models/concrete/LogEntity'
 import { DatabaseSingleton } from './utils/db';
-import { NeDBManager } from './utils/lowDBManager';
+//import { NeDBManager } from './utils/lowDBManager';
 
 const app = express();
 
-const dbManager = new NeDBManager('clinical_case.json');
+/* const dbManager = new NeDBManager('clinical_case.json');
 const collectionName = 'clinical_case';
-
+ */
 app.use(express.json());
 
-app.post('/generate', async (req: Request, res: Response) => {
-    
+app.post('/generate', async (req: Request, res: Response) : Promise<any> => {
+
     const db = await DatabaseSingleton.getInstance(); 
 
     const logger = new LogEntity(db);
+
     try {
         const generator = new GeneratorEntity(db);
         generator.attach(logger);
@@ -69,7 +70,7 @@ app.get('/logs', async (req: Request, res: Response) : Promise<void> => {
 /**
  * Récupérer tous les cas cliniques.
  */
-app.get('/clinical_cases', (req: Request, res: Response) => {
+/* app.get('/clinical_cases', (req: Request, res: Response) => {
     
     dbManager.getAll((err, data) => {
         if (err) {
@@ -77,12 +78,12 @@ app.get('/clinical_cases', (req: Request, res: Response) => {
         }
         res.status(200).json(data);
     });
-});
+}); */
   
   /**
    * Rechercher des cas cliniques avec des critères.
    */
-  app.post('/clinical_cases/search', (req: Request, res: Response) : any => {
+  /* app.post('/clinical_cases/search', (req: Request, res: Response) : any => {
     const  constraints  = req.body;
     
     console.log (constraints)
@@ -97,13 +98,13 @@ app.get('/clinical_cases', (req: Request, res: Response) => {
       }
       res.status(200).json(cases);
     });
-  });
+  }); */
   
   
   /**
    * Ajouter un cas clinique.
    */
-  app.post('/clinical_cases', async (req: Request, res: Response) => {
+  /* app.post('/clinical_cases', async (req: Request, res: Response) => {
     try {
       const clinicalCase = req.body;
       const newCase = await dbManager.addItem(clinicalCase);
@@ -111,12 +112,12 @@ app.get('/clinical_cases', (req: Request, res: Response) => {
     } catch (error) {
       res.status(500).json({ error: "Erreur lors de l'ajout du cas clinique." });
     }
-  });
+  }); */
   
   /**
    * Mettre à jour un cas clinique en fonction des critères.
    */
-  app.put('/clinical_cases', async (req: Request, res: Response):Promise<any> => {
+  /* app.put('/clinical_cases', async (req: Request, res: Response):Promise<any> => {
     try {
       const { constraints, updates } = req.body;
   
@@ -148,7 +149,7 @@ app.get('/clinical_cases', (req: Request, res: Response) => {
     } catch (error) {
       res.status(500).json({ error: 'Erreur lors de la mise à jour des cas cliniques.' });
     }
-  });
+  }); */
   
   /**
    * Supprimer un cas clinique.
