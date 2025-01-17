@@ -14,8 +14,8 @@ app.use(express.json());
 
 app.post('/generate', async (req: Request, res: Response) : Promise<any> => {
 
-    const  constraints  = req.body;
-    
+    const  {startDate, endDate, symptoms}  = req.body;
+    const constraints = {startDate, endDate, symptoms}
     console.log (constraints)
 
     if (!constraints || typeof constraints !== 'object') {

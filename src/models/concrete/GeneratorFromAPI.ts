@@ -53,12 +53,12 @@ export class GeneratorFromAPI implements GeneratorEntityInterface {
         if (constraint.symptoms && !consultation.symptomes.includes(constraint.symptoms)) {
           isValid = false;  
         }
-        if (constraint.diagnosis && !consultation.diagnostique.includes(constraint.diagnosis)) {
+        /* if (constraint.diagnosis && !consultation.diagnostique.includes(constraint.diagnosis)) {
           isValid = false;  
         }
         if (constraint.age && consultation.age !== constraint.age) {
           isValid = false;  
-        }
+        } */
       });
   
       if (isValid) {
